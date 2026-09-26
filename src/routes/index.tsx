@@ -5,7 +5,7 @@ import { CATEGORIES, PRODUCTS, type Category } from "@/lib/products";
 import heroImg from "@/assets/hero.jpg";
 
 const searchSchema = (search: Record<string, unknown>) => ({
-  cat: (search.cat as Category | undefined) ?? undefined,
+  cat: (search["cat"] as Category | undefined) ?? undefined,
 });
 
 export const Route = createFileRoute("/")({
@@ -126,7 +126,7 @@ function Index() {
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
           <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar sm:justify-center">
             <button
-              onClick={() => navigate({ search: {}, replace: true })}
+              onClick={() => navigate({ search: { cat: undefined }, replace: true })}
               className={`flex shrink-0 flex-col items-center gap-3 border px-6 py-5 transition-colors ${
                 !cat
                   ? "border-foreground bg-primary text-primary-foreground"

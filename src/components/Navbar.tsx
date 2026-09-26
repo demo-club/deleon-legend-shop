@@ -34,6 +34,7 @@ export function Navbar() {
 
         <Link
           to="/"
+          search={{ cat: undefined }}
           className="absolute left-1/2 -translate-x-1/2 font-display text-xl font-bold tracking-[0.35em] sm:text-2xl"
         >
           DELEON
@@ -59,6 +60,7 @@ export function Navbar() {
             <li>
               <Link
                 to="/"
+                search={{ cat: undefined }}
                 onClick={() => setMenuOpen(false)}
                 className="text-sm font-medium uppercase tracking-[0.2em]"
               >
