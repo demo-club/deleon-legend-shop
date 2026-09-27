@@ -135,27 +135,56 @@ function Index() {
         </div>
       </section>
 
-      {/* Categories */}
-      <section id="catalogo" className="border-b border-border">
-        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+      {/* Audience tabs */}
+      <section id="catalogo" className="border-b border-border bg-background">
+        <div className="mx-auto max-w-7xl px-4 pt-10 sm:px-6">
+          <p className="text-eyebrow mb-5 text-center text-muted-foreground">
+            Colección
+          </p>
+          <div className="flex gap-7 overflow-x-auto no-scrollbar sm:justify-center">
+            {AUDIENCES.map((a) => (
+              <button
+                key={a.id}
+                onClick={() =>
+                  navigate({ search: { cat, aud: a.id }, replace: true })
+                }
+                className={`relative shrink-0 pb-3 font-display text-sm font-bold uppercase tracking-[0.14em] transition-colors sm:text-base ${
+                  activeAud === a.id
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {a.label}
+                <span
+                  className={`absolute inset-x-0 bottom-0 h-[2px] origin-left bg-foreground transition-transform duration-300 ${
+                    activeAud === a.id ? "scale-x-100" : "scale-x-0"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Categories */}
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
           <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar sm:justify-center">
             <button
-              onClick={() => navigate({ search: { cat: undefined }, replace: true })}
-              className={`flex shrink-0 flex-col items-center gap-3 border px-6 py-5 transition-colors ${
+              onClick={() =>
+                navigate({ search: { cat: undefined, aud }, replace: true })
+              }
+              className={`flex shrink-0 flex-col items-center justify-center gap-3 border px-6 py-5 transition-colors ${
                 !cat
                   ? "border-foreground bg-primary text-primary-foreground"
                   : "border-border bg-card hover:border-foreground/40"
               }`}
             >
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em]">
-                Todo
-              </span>
+              <span className="text-eyebrow">Todo</span>
             </button>
             {CATEGORIES.map((c) => (
               <button
                 key={c.id}
                 onClick={() =>
-                  navigate({ search: { cat: c.id }, replace: true })
+                  navigate({ search: { cat: c.id, aud }, replace: true })
                 }
                 className={`flex shrink-0 flex-col items-center gap-3 border px-6 py-5 transition-colors ${
                   cat === c.id
@@ -164,9 +193,7 @@ function Index() {
                 }`}
               >
                 <CategoryIcon id={c.id} />
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em]">
-                  {c.label}
-                </span>
+                <span className="text-eyebrow">{c.label}</span>
               </button>
             ))}
           </div>
@@ -175,24 +202,26 @@ function Index() {
 
       {/* Toolbar */}
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 pt-8 sm:px-6">
-        <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
-          {cat ? CATEGORIES.find((c) => c.id === cat)?.label : "Todos los productos"}
+        <h2 className="font-display text-2xl font-extrabold tracking-[-0.03em] sm:text-4xl">
+          {AUDIENCES.find((a) => a.id === activeAud)?.label}
+          {cat ? ` · ${CATEGORIES.find((c) => c.id === cat)?.label}` : ""}
         </h2>
         <div className="flex items-center gap-3">
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as typeof sort)}
-            className="border border-border bg-card px-3 py-2 text-[11px] font-medium uppercase tracking-[0.15em] outline-none"
+            className="border border-border bg-card px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.15em] outline-none"
           >
             <option value="recommended">Recomendados</option>
             <option value="low">Precio: menor a mayor</option>
             <option value="high">Precio: mayor a menor</option>
           </select>
-          <span className="text-[11px] text-muted-foreground">
+          <span className="font-numeric text-[11px] text-muted-foreground">
             {products.length} artículos
           </span>
         </div>
       </div>
+
 
       {/* Grid */}
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
