@@ -84,18 +84,24 @@ function CategoryIcon({ id }: { id: Category }) {
 }
 
 function Index() {
-  const { cat } = Route.useSearch();
+  const { cat, aud } = Route.useSearch();
+  const activeAud: Audience = aud ?? "new";
   const navigate = Route.useNavigate();
   const [sort, setSort] = useState<"recommended" | "low" | "high">(
     "recommended",
   );
 
   const products = useMemo(() => {
-    let list = cat ? PRODUCTS.filter((p) => p.category === cat) : PRODUCTS;
+    let list = PRODUCTS;
+    if (activeAud === "new") list = list.filter((p) => p.isNew);
+    else if (activeAud !== "all")
+      list = list.filter((p) => p.audiences.includes(activeAud));
+    if (cat) list = list.filter((p) => p.category === cat);
     if (sort === "low") list = [...list].sort((a, b) => a.price - b.price);
     if (sort === "high") list = [...list].sort((a, b) => b.price - a.price);
     return list;
-  }, [cat, sort]);
+  }, [cat, activeAud, sort]);
+
 
   return (
     <div>
