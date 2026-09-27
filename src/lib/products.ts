@@ -21,30 +21,8 @@ export const CATEGORIES: { id: Category; label: string }[] = [
   { id: "longsleeves", label: "Manga Larga" },
   { id: "hoodies", label: "Hoodies" },
   { id: "sweatshirts", label: "Sudaderas" },
-  {
-    id: "mini-legend-tee-white",
-    name: "Mini Legend Tee",
-    color: "Blanco",
-    price: 28,
-    category: "tshirts",
-    image: tankWhite,
-    audiences: ["kids"],
-    isNew: true,
-    description:
-      "Camiseta infantil de algodón suave 180gsm. Corte cómodo para niños y bebés, impresa bajo demanda.",
-  },
-  {
-    id: "mini-legend-hoodie-black",
-    name: "Mini Legend Hoodie",
-    color: "Negro",
-    price: 48,
-    category: "hoodies",
-    image: hoodieBlack,
-    audiences: ["kids"],
-    description:
-      "Hoodie infantil de felpa suave con capucha forrada y bolsillo frontal. Tallas para niños.",
-  },
 ];
+
 
 export const AUDIENCES: { id: Audience; label: string }[] = [
   { id: "new", label: "New In" },
