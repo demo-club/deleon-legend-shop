@@ -225,12 +225,19 @@ function Index() {
 
       {/* Grid */}
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
-        <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
-          {products.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
+        {products.length === 0 ? (
+          <p className="py-16 text-center text-sm text-muted-foreground">
+            Pronto habrá nuevas prendas en esta selección.
+          </p>
+        ) : (
+          <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
+            {products.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        )}
       </main>
+
 
       {/* Statement */}
       <section className="bg-secondary px-4 py-20 text-center sm:py-28">
