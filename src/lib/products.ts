@@ -13,12 +13,24 @@ export type Category =
   | "hoodies"
   | "sweatshirts";
 
+export type Audience = "new" | "all" | "men" | "women" | "unisex" | "kids";
+
 export const CATEGORIES: { id: Category; label: string }[] = [
   { id: "tshirts", label: "Camisetas" },
   { id: "tanks", label: "Tank Tops" },
   { id: "longsleeves", label: "Manga Larga" },
   { id: "hoodies", label: "Hoodies" },
   { id: "sweatshirts", label: "Sudaderas" },
+];
+
+
+export const AUDIENCES: { id: Audience; label: string }[] = [
+  { id: "new", label: "New In" },
+  { id: "all", label: "All" },
+  { id: "men", label: "Men" },
+  { id: "women", label: "Women" },
+  { id: "unisex", label: "Unisex" },
+  { id: "kids", label: "Kids & Baby" },
 ];
 
 export interface Product {
@@ -29,12 +41,17 @@ export interface Product {
   category: Category;
   image: string;
   bestseller?: boolean;
+  isNew?: boolean;
+  audiences: Audience[];
   description: string;
 }
+
 
 export const PRODUCTS: Product[] = [
   {
     id: "heavy-tee-navy",
+    audiences: ["unisex","men"],
+    isNew: true,
     name: "Heavy Box Tee",
     color: "Azul Marino",
     price: 48,
@@ -46,6 +63,8 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "void-tee-black",
+    audiences: ["unisex","men","women"],
+    isNew: true,
     name: "Void Oversized Tee",
     color: "Negro Carbón",
     price: 42,
@@ -57,6 +76,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "structure-hoodie-gray",
+    audiences: ["unisex","men"],
     name: "Structure Hoodie",
     color: "Gris Lavado",
     price: 95,
@@ -68,6 +88,8 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "legend-hoodie-black",
+    audiences: ["unisex","men","women"],
+    isNew: true,
     name: "Legend Hoodie",
     color: "Negro",
     price: 98,
@@ -78,6 +100,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "classic-crew-sand",
+    audiences: ["unisex","women"],
     name: "Classic Crewneck",
     color: "Arena",
     price: 82,
@@ -89,6 +112,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "linear-tank-white",
+    audiences: ["women","unisex"],
     name: "Linear Tank",
     color: "Blanco Ártico",
     price: 36,
@@ -99,6 +123,8 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "tech-ls-olive",
+    audiences: ["men","unisex"],
+    isNew: true,
     name: "Technical LS Tee",
     color: "Oliva",
     price: 56,
@@ -107,7 +133,31 @@ export const PRODUCTS: Product[] = [
     description:
       "Manga larga de peso medio con puños ajustados. Tono oliva lavado, versátil todo el año.",
   },
+  {
+    id: "mini-legend-tee-white",
+    name: "Mini Legend Tee",
+    color: "Blanco",
+    price: 28,
+    category: "tshirts",
+    image: tankWhite,
+    audiences: ["kids"],
+    isNew: true,
+    description:
+      "Camiseta infantil de algodón suave 180gsm. Corte cómodo para niños y bebés, impresa bajo demanda.",
+  },
+  {
+    id: "mini-legend-hoodie-black",
+    name: "Mini Legend Hoodie",
+    color: "Negro",
+    price: 48,
+    category: "hoodies",
+    image: hoodieBlack,
+    audiences: ["kids"],
+    description:
+      "Hoodie infantil de felpa suave con capucha forrada y bolsillo frontal. Tallas para niños.",
+  },
 ];
+
 
 export const SIZES = ["XS", "S", "M", "L", "XL", "XXL"] as const;
 
