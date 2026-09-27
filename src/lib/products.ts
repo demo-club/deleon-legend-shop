@@ -13,12 +13,23 @@ export type Category =
   | "hoodies"
   | "sweatshirts";
 
+export type Audience = "new" | "all" | "men" | "women" | "unisex" | "kids";
+
 export const CATEGORIES: { id: Category; label: string }[] = [
   { id: "tshirts", label: "Camisetas" },
   { id: "tanks", label: "Tank Tops" },
   { id: "longsleeves", label: "Manga Larga" },
   { id: "hoodies", label: "Hoodies" },
   { id: "sweatshirts", label: "Sudaderas" },
+];
+
+export const AUDIENCES: { id: Audience; label: string }[] = [
+  { id: "new", label: "New In" },
+  { id: "all", label: "All" },
+  { id: "men", label: "Men" },
+  { id: "women", label: "Women" },
+  { id: "unisex", label: "Unisex" },
+  { id: "kids", label: "Kids & Baby" },
 ];
 
 export interface Product {
@@ -29,8 +40,11 @@ export interface Product {
   category: Category;
   image: string;
   bestseller?: boolean;
+  isNew?: boolean;
+  audiences: Audience[];
   description: string;
 }
+
 
 export const PRODUCTS: Product[] = [
   {
