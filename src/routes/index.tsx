@@ -1,16 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ProductCard } from "@/components/ProductCard";
-import { CATEGORIES, PRODUCTS, type Category } from "@/lib/products";
+import {
+  AUDIENCES,
+  CATEGORIES,
+  PRODUCTS,
+  type Audience,
+  type Category,
+} from "@/lib/products";
 import heroImg from "@/assets/hero.jpg";
 
 const searchSchema = (search: Record<string, unknown>) => ({
   cat: (search["cat"] as Category | undefined) ?? undefined,
+  aud: (search["aud"] as Audience | undefined) ?? undefined,
 });
 
 export const Route = createFileRoute("/")({
   validateSearch: searchSchema,
   component: Index,
+
   head: () => ({
     meta: [
       { title: "DELEON — Esenciales Premium Bajo Demanda" },
